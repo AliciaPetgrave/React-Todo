@@ -2,6 +2,7 @@ import React from 'react';
 import Todo from './components/TodoComponents/Todo'
 import TodoForm from './components/TodoComponents/TodoForm'
 import TodoList from './components/TodoComponents/TodoList'
+import './components/TodoComponents/Todo.css'
 
 const stuffTodo = [
   {
@@ -28,6 +29,8 @@ class App extends React.Component {
     }
   }
 
+
+
   //function to add the new todo
 addNewTodo = todo => {
   const newTodo = {
@@ -40,6 +43,28 @@ addNewTodo = todo => {
   })
 }
 
+//toggles the current state
+toggleItem = clickedId => {
+  // loops through array of todos
+  const newTodoList = this.state.todoList.map(item => {
+    // finds the todo by ID
+    // toggles if it was completed or not
+    if (item.id === clickedId) {
+      return {
+        ...item,
+        completed: !item.completed
+      };
+    } else {
+      return item;
+    }
+  });
+
+  // Update state with the new array
+  this.setState({
+    todoList: newTodoList
+  });
+};
+
 
 
   render() {
@@ -47,7 +72,7 @@ addNewTodo = todo => {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoForm addNewTodo={this.addNewTodo}/>
-        <TodoList/>
+        <TodoList stuffTodo={this.state.todoList} toggleItem={this.toggleItem}/>
       </div>
     );
   }

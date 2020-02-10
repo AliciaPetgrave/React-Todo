@@ -27,7 +27,7 @@ export default class TodoForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="newItem" value={this.state.newTodo} onChange={this.handleChanges}></input>
+                    <input type="text" name="newTodo" value={this.state.newTodo} onChange={this.handleChanges}></input>
                     <button type="submit">Add ToDo</button>
                     <button type="submit">Clear Completed</button>
                 </form>
