@@ -25,14 +25,15 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todoList: stuffTodo
+      todoList: stuffTodo,
+      newItem: ""
     }
   }
 
 
 
   //function to add the new todo
-addNewTodo = todo => {
+addNewItem = todo => {
   const newTodo = {
     task: todo,
     id: Date.now(),
@@ -65,13 +66,27 @@ toggleItem = clickedId => {
   });
 };
 
+//watches the input for changes
+handleChanges = e => {
+  this.setState({
+      newItem : e.target.value
+  })
+}
+
+//adds new item to the current list
+handleSubmit = e => {
+  e.preventDefault();
+  this.addNewItem(this.state.newItem)
+  console.log("submitted")
+}
+
 
 
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoForm addNewTodo={this.addNewTodo}/>
+        <TodoForm addNewItem={this.addNewItem} handleChanges={this.handleChanges} handleSubmit={this.handleSubmit}/>
         <TodoList stuffTodo={this.state.todoList} toggleItem={this.toggleItem}/>
       </div>
     );
