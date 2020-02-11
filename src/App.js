@@ -1,5 +1,4 @@
 import React from 'react';
-import Todo from './components/TodoComponents/Todo'
 import TodoForm from './components/TodoComponents/TodoForm'
 import TodoList from './components/TodoComponents/TodoList'
 import './components/TodoComponents/Todo.css'
@@ -66,6 +65,13 @@ toggleItem = clickedId => {
   });
 };
 
+//deletes todo if completed = true
+deleteTodo = e => {
+  this.setState({
+    todoList: this.state.todoList.filter(task => !task.completed)
+  })
+}
+
 //watches the input for changes
 handleChanges = e => {
   this.setState({
@@ -77,17 +83,17 @@ handleChanges = e => {
 handleSubmit = e => {
   e.preventDefault();
   this.addNewItem(this.state.newItem)
-  console.log("submitted")
 }
 
 
 
   render() {
     return (
-      <div>
+      <div className="App">
         <h2>Welcome to your Todo App!</h2>
-        <TodoForm addNewItem={this.addNewItem} handleChanges={this.handleChanges} handleSubmit={this.handleSubmit}/>
-        <TodoList stuffTodo={this.state.todoList} toggleItem={this.toggleItem}/>
+        <TodoForm addNewItem={this.addNewItem} handleChanges={this.handleChanges} handleSubmit={this.handleSubmit} deleteIt={this.deleteTodo}/>
+        <TodoList stuffTodo={this.state.todoList} toggleItem={this.toggleItem} />
+
       </div>
     );
   }
